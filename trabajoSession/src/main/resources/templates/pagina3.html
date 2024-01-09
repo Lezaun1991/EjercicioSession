@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>pagina3</title>
+</head>
+<body>
+<nav th:replace="~{fragmentos/barraSuperior::barra-superior}"></nav>
+  <form method="post"
+        th:action="@{/pagina3/submit}"
+        th:object="${cliente}">
+      <fieldset>
+          <legend>Datos Bancarios</legend>
+  <div>
+    <label for="cuentaBancaria">Numero Cuenta Bancaria</label>
+    <input id="cuentaBancaria" name="cuentaBancaria" th:field="*{cuentaBancaria}">
+  </div>
+  <button type="submit">Grabar informacion e ir al resumen final</button>
+      </fieldset>
+  </form>
+</body>
+</html>

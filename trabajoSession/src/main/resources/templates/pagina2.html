@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>pagina2</title>
+</head>
+<body>
+<nav th:replace="~{fragmentos/barraSuperior::barra-superior}"></nav>
+
+  <form method="post"
+        th:action="@{/pagina2/submit}"
+        th:object="${cliente}">
+      <fieldset>
+          <legend>Datos Profesional</legend>
+    <div>
+        <label for="departamento"></label>
+        <select th:field="*{puesto}" id="departamento">
+       <option value="0">Seleccione departamento</option>
+        <option th:each="puestoTrabajo : ${T(com.example.trabajosession.entidades.DepartamentosTrabajo).values()}"
+                th:value="${puestoTrabajo}" th:text="${puestoTrabajo}"></option>
+    </select>
+      <label for="sueldo">Salario</label>
+      <input id="sueldo" name="salario" th:field="*{salario}">
+    </div>
+          <hr>
+    <div>
+      <label for="comentarios">Comentarios</label>
+      <textarea id="comentarios" name="coment" th:field="*{comentarios}"></textarea>
+    </div>
+    <button type="submit">Grabar informacion e ir al paso 3 - Datos Bancarios</button>
+      </fieldset>
+  </form>
+</body>
+</html>

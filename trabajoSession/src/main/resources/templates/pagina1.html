@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>pagina1</title>
+</head>
+<body>
+<nav th:replace="~{fragmentos/barraSuperior::barra-superior}"></nav>
+<form method="post"
+      th:action="@{/pagina1/submit}"
+      th:object="${cliente}">
+    <fieldset>
+        <legend>Datos personales</legend>
+    <div>
+        <label for="name">Nombre</label>
+        <input id="name" name="nombre" type="text" th:field="*{nombre}">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" id="apellidos" name="last-name" th:field="*{apellidos}">
+    </div>
+        <hr>
+    <div>
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+        <input type="date" id="fechaNacimiento" name="fechaNac" th:field="*{fechaNacimiento}">
+    </div>
+        <hr>
+    <div th:each="genero : ${T(com.example.trabajosession.entidades.TipoGenero).values()}">
+         <input type="radio" name="prueba" th:id="'genero-' + ${genero}" th:value="${genero}" th:field="*{tipoGenero}"/>
+         <label th:for="'genero-' + ${genero}" th:text="${genero}"></label><br/>
+    </div>
+        <hr>
+    <div th:each="situacionCivil : ${T(com.example.trabajosession.entidades.EstadoCivil).values()}">
+        <input type="checkbox" name="situacion" th:id="'casado-' + ${situacionCivil}"  th:value="${situacionCivil}"
+               th:field="*{estadoCivil}">
+        <label th:for="'casado-' + ${situacionCivil}" th:text="${situacionCivil}"></label><br>
+    </div>
+        <hr>
+    <div>
+
+        <select th:field="*{nacionalidad}" id="nacionalidad" name="nacionalidad">
+            <option value="0">seleccione tipo Nacionalidad</option>
+            <option th:each="pais : ${T(com.example.trabajosession.entidades.TipoNacionalidad).values()}"
+                    th:value="${pais}" th:text="${pais}"></option>
+        </select>
+    </div>
+    <button type="submit">Grabar informacion e ir al paso 2 - Datos profesionales</button>
+        </fieldset>
+</form>
+
+</body>
+</html>
